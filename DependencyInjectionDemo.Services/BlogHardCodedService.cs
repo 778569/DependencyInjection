@@ -6,9 +6,9 @@ using DependencyInjectionDemo.Models;
 
 namespace DependencyInjectionDemo.Services
 {
-    public class BlogHardCodedService
+    public class BlogHardCodedService : IBlogService
     {
-        public List<Post> GetAllPosts()
+        public List<Post> GetAllPosts() 
         {
             var blogData = new HardCodedData();
 

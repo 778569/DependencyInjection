@@ -1,3 +1,4 @@
+using DependencyInjectionDemo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,11 @@ namespace DependencyInjectionDemo.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //services.AddScoped<IBlogService, BlogHardCodedService>();
+            services.AddHttpClient<IBlogService, BlogServiceFromAPI>(client=>
+            {
+                client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

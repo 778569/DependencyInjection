@@ -14,16 +14,18 @@ namespace DependencyInjectionDemo.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBlogService _blogService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBlogService blogService)
         {
             _logger = logger;
+            _blogService = blogService;
         }
 
         public IActionResult Index()
         {
-            var blogService = new BlogHardCodedService();
-            var posts = blogService.GetAllPosts();
+            
+            var posts = _blogService.GetAllPosts();
             return View(posts);
         }
 
@@ -40,8 +42,8 @@ namespace DependencyInjectionDemo.Web.Controllers
 
         public IActionResult Details(int id)
         {
-            var blogService = new BlogHardCodedService();
-            var post = blogService.GetPost(id);
+           
+            var post = _blogService.GetPost(id);
 
             return View(post);
         }
